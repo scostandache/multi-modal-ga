@@ -58,6 +58,12 @@ class Parameter(object):
         decimal_aprox = BitArray(bin=self.__bit_repr).uint * 1.0 #get a decimal aproximation of our bitstring
         self.__float_repr = round(self.__limit['min'] + (decimal_aprox*(self.__limit['max']-self.__limit['min']))/(2.0**self.__bitarr_len-1),self.__precision)
 
+    def mutate(self):
+        #perform a mutation on a random bit
+        mut_idx = np.random.random_integers(0, self.bit_len - 1)
+        self.__BITS[mut_idx] = int(not self.__BITS[mut_idx]) #negate a bit at a random position, in the bit array
+        self.recalculate()
+        print 'parameter mutation'
 
 
 class Chromosome(object):
@@ -79,6 +85,8 @@ class Chromosome(object):
         else:
             self.PARAMS = [Parameter(LIMITS[0], precision) for _ in xrange(param_no)] #all of the parameters will be within the same limit (LIMITS[0])
         #*** an alternative would be to verify if the LIMITS is an array or a dictionary. if it's an array -> case 1, else case 2, without using LIMITS[0]
+
+        self.__param_no = param_no
 
     @property
     def params_raw(self):
@@ -105,6 +113,11 @@ class Chromosome(object):
         #return an array consisting of the concatenated parameters, under arrays of bits
         return list(itertools.chain(*[p.bitarr for p in self.PARAMS]))
 
+    def mutate(self):
+        #mutate a randomly chosen parameter
+        mut_idx = np.random.random_integers(0, self.__param_no - 1)
+        self.PARAMS[mut_idx].mutate()
+
 
 if __name__ == '__main__':
 
@@ -130,12 +143,15 @@ if __name__ == '__main__':
     print c.params_float
 
     for p in params:
-        p.bitarr[5] = int(not p.bitarr[5])
-        p.recalculate()
+         p.bitarr[5] = int(not p.bitarr[5])
+        # p.recalculate()
+        #p.mutate()
+
+
+
+    c.mutate()
 
     print c.params_float
-
-
 
 
 
