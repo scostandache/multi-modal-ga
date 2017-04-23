@@ -124,20 +124,16 @@ if __name__ == '__main__':
     # print chosen_param.float_repr
     #
     # chosen_param.bitarr[5] = int(not chosen_param.bitarr[5])
-    #
-    # print chosen_param.bitarr
-    # chosen_param.recalculate()
-    #
-    # print chosen_param.float_repr
 
     params = c.params_raw
 
     print c.params_float
 
-    for _ in xrange(5000):
-        for p in params:
-            p.bitarr[5] = int(not p.bitarr[5])
-            p.recalculate()
+    for p in params:
+        p.bitarr[5] = int(not p.bitarr[5])
+        p.recalculate()
+
+    print c.params_float
 
 
 
