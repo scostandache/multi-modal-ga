@@ -111,12 +111,8 @@ if __name__ == '__main__':
     # POPULATION =[]
 
     c = Chromosome(param_no=5,LIMITS=[{'min':-3,'max':3}],precision=5)
-    # c_bitarr = c.bitarr
-    #
     # mut_idx = np.random.random_integers(0,len(c_bitarr)-1)
-    # print mut_idx
-    # print c_bitarr
-    #
+
     # c_bitarr[mut_idx] = int(not c_bitarr[mut_idx])
     #
     # print c_bitarr
@@ -138,11 +134,12 @@ if __name__ == '__main__':
 
     print c.params_float
 
-    for p in params:
-        p.bitarr[5] = int(not p.bitarr[5])
-        p.recalculate()
+    for _ in xrange(5000):
+        for p in params:
+            p.bitarr[5] = int(not p.bitarr[5])
+            p.recalculate()
 
-    print c.params_float
+
 
 
 
