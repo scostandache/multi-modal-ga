@@ -1,7 +1,7 @@
 import numpy as np
 import itertools
 from bitstring import BitArray
-
+import copy
 
 class Parameter(object):
     #class to represent a parameter in a chromosome's fitness function
@@ -118,12 +118,23 @@ class Chromosome(object):
         mut_idx = np.random.random_integers(0, self.__param_no - 1)
         self.PARAMS[mut_idx].mutate()
 
+    def crossover(self,parent):
+        first_desc = copy.deepcopy(self)
+        second_desc = copy.deepcopy(parent)
+        cut_point = np.random.random_integers(0,len(self.PARAMS))
+        print cut_point
+
+        for i in range(cut_point):
+            first_desc.PARAMS[i],second_desc.PARAMS[i] = second_desc.PARAMS[i],first_desc.PARAMS[i]
+        return first_desc,second_desc
+
 
 if __name__ == '__main__':
 
     # POPULATION =[]
 
-    c = Chromosome(param_no=5,LIMITS=[{'min':-3,'max':3}],precision=5)
+    c1 = Chromosome(param_no=5,LIMITS=[{'min':-3,'max':3}],precision=5)
+    c2 = Chromosome(param_no=5, LIMITS=[{'min': -3, 'max': 3}], precision=5)
     # mut_idx = np.random.random_integers(0,len(c_bitarr)-1)
 
     # c_bitarr[mut_idx] = int(not c_bitarr[mut_idx])
@@ -138,23 +149,28 @@ if __name__ == '__main__':
     #
     # chosen_param.bitarr[5] = int(not chosen_param.bitarr[5])
 
-    params = c.params_raw
+    # params = c.params_raw
+    #
+    # print c.params_float
+    #
+    # for p in params:
+    #      p.bitarr[5] = int(not p.bitarr[5])
+    #     # p.recalculate()
+    #     #p.mutate()
+    #
+    #
+    #
+    # c.mutate()
 
-    print c.params_float
+    print c1.params_float
+    print c2.params_float
+    print ""
 
-    for p in params:
-         p.bitarr[5] = int(not p.bitarr[5])
-        # p.recalculate()
-        #p.mutate()
-
+    c1.crossover(c2)
 
 
-    c.mutate()
-
-    print c.params_float
-
-
-
+    print c1.params_float
+    print c2.params_float
 
 
 
