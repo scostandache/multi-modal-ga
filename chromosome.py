@@ -129,6 +129,15 @@ class Chromosome(object):
     def bitarr(self,new_bitarr):
         #set a new bit array
         self.__bitarr = copy.deepcopy(new_bitarr)
+    @property
+    def fitness(self):
+        #return the fitness of the chromosome
+        return self.__fitness
+
+    @fitness.setter
+    def fitness(self,new_fitness):
+        #set the fitness
+        self.__fitness = new_fitness
 
 
     def mutate(self):
@@ -168,7 +177,7 @@ class Chromosome(object):
             p_second.recalculate()
 
         return first_desc, second_desc
-
+        #todo-me zip first_desc and second_desc
 
 
 if __name__ == '__main__':
