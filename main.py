@@ -1,18 +1,21 @@
-import numpy as np
-from bitstring import BitArray
-from population import Population
+# todo-me create test classes
+import fitness
+from GA import GA
+import niche
+
+if __name__ == '__main__':
+
+    galg = GA()
+    galg.solve(gen_no=200,
+               niche_method=niche.deterministic_crowding,
+               pop_size=100,
+               LIMITS=fitness.dispatcher['SHCB']['LIMITS'],
+               param_no=2,
+               precision=10,
+               fitness=fitness.dispatcher['SHCB']['function']
+               )
 
 
-def foo():
-    print 'foo function called'
 
-def bar():
-    print 'bar function called'
 
-dispatch = {
-    'foo':[foo,2,[(-3,3),(2,2)]],
-    'bar':[bar,[(3,3)]]
-}
 
-if __name__ =='__main__':
-    x=2
