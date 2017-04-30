@@ -13,7 +13,7 @@ def rosenbrock(params):
 
     fitness = 0
     for curr, next in zip(params, params[1:]):
-        fitness += 100.0*(curr - next**2)**2 + (1-curr)**2
+        fitness += (100.0*(next - curr**2)**2 + (1-curr)**2)
 
     return fitness
 
@@ -28,8 +28,14 @@ def griewangk(params):
 def SHCB(params):
 
     a, b = params
-    return (4.0-2.1*(a*a)+((a*a*a*a)/3)) + a*b + (-4.0+4.0*(b*b))*b*b
+    return (4 - 2.1*(a*a) + (a*a*a*a)/3.0)*(a*a) + a*b + (-4 + 4*(b*b))*(b*b)
 
+
+def test(x):
+    if(type(x)==list):
+        return 3.0 + (x[0]**2) - 3.0*math.cos((2.0*math.pi)*x[0])
+    else:
+        return 3.0 + (x ** 2) - 3.0 * math.cos((2.0 * math.pi) * x)
 
 dispatcher = {
     'rastrigin': {
@@ -47,5 +53,9 @@ dispatcher = {
     'SHCB':{
         'function': SHCB,
         'LIMITS': [{'min': -3, 'max': 3},{'min': -2, 'max': 2}]
+    },
+    'test':{
+        'function': test,
+        'LIMITS':[{'min':-5, 'max':5}]
     }
 }

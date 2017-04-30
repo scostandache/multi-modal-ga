@@ -167,7 +167,7 @@ class Chromosome(object):
         self.__fitness = new_fitness
 
     def calc_fitness(self, fitness_function):
-        self.__fitness = round(1.0/fitness_function(self.params_float),self.__precision)
+        self.__fitness = round(fitness_function(self.params_float),self.__precision)
 
     def distance(self, chromosome):
         # measure the Hamming distance between the object and other chromosome

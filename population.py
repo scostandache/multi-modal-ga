@@ -15,7 +15,7 @@ class Population(object):
 
         self.MEMBERS = [Chromosome(param_no, LIMITS, precision) for _ in xrange(pop_size)]
         for member in self.MEMBERS:
-            member.fitness = (round(1.0/fitness(member.params_float), precision))
+            member.fitness = (round(fitness(member.params_float), precision))
         self.__fitness = fitness
         self.__precision = precision
 
