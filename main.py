@@ -6,13 +6,13 @@ import niche
 if __name__ == '__main__':
 
     galg = GA()
-    galg.solve(gen_no=250,
+    galg.solve(gen_no=50,
                niche_method=niche.deterministic_crowding,
                pop_size=150,
-               LIMITS=fitness.dispatcher['rastrigin']['LIMITS'],
+               LIMITS=fitness.dispatcher['SHCB']['LIMITS'],
                param_no=2,
                precision=5,
-               fitness=fitness.dispatcher['rastrigin']['function']
+               fitness=fitness.dispatcher['SHCB']['function']
                )
 
 
