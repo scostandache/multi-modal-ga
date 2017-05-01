@@ -9,13 +9,17 @@ class GA(object):
               LIMITS,
               param_no,
               precision,
-              fitness):
-
-        population = Population(pop_size, LIMITS, param_no, precision, fitness)
+              fitness,
+              **kwargs):
+        population = Population(pop_size,
+                                LIMITS,
+                                param_no,
+                                precision,
+                                fitness)
 
         for i in xrange(gen_no):
-            niche_method(population, fitness)
+            niche_method(population, fitness,**kwargs)
             if (i % 10 == 0):
-                print "."
+                print len(population.MEMBERS)
 
-        population.visualise()
+        population.visualise_scatter()
