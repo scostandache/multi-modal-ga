@@ -21,5 +21,6 @@ class GA(object):
             niche_method(population, fitness,**kwargs)
             if (i % 10 == 0):
                 print len(population.MEMBERS)
-
-        population.visualise_scatter()
+        population.sort()
+        print population.MEMBERS[0].fitness
+        #population.visualise_scatter()

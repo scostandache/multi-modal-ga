@@ -114,10 +114,10 @@ class Chromosome(object):
         # if we have a case when each function parameter has it's own limit
         if param_no == len(LIMITS):
             # we create a parameter for each limit
-            self.PARAMS = [Parameter(limit, precision) for limit in LIMITS]
+            self.PARAMS = np.array([Parameter(limit, precision) for limit in LIMITS])
         else:
             # all of the parameters will be within the same limit
-            self.PARAMS = [Parameter(LIMITS[0], precision) for _ in xrange(param_no)]
+            self.PARAMS = np.array([Parameter(LIMITS[0], precision) for _ in xrange(param_no)])
         # *** an alternative would be to verify if the LIMITS is an array or a dictionary.
         # if it's an array -> case 1, else case 2, without using LIMITS[0]
 
