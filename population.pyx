@@ -2,7 +2,7 @@ from chromosome import Chromosome
 import random
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
-from fitness import *
+from fitness_cython import *
 from matplotlib import cm
 import numpy as np
 
@@ -18,7 +18,7 @@ class Population(object):
         :param precision: precision of parameters' float values
         """
 
-        self.MEMBERS = [Chromosome(param_no, LIMITS, precision) for _ in xrange(pop_size)]
+        self.MEMBERS = np.array([Chromosome(param_no, LIMITS, precision) for _ in xrange(pop_size)])
         for member in self.MEMBERS:
             member.fitness = (round(fitness(member.params_float), precision))
         self.__fitness = fitness

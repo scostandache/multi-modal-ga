@@ -138,7 +138,7 @@ class Chromosome(object):
     @property
     def params_float(self):
         # get the array of parameters in float form
-        return [param.float_repr for param in self.PARAMS]
+        return np.array([param.float_repr for param in self.PARAMS])
 
     @property
     def bitstring(self):

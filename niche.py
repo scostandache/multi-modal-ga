@@ -1,5 +1,5 @@
 import random
-import numpy
+import numpy as np
 import copy
 
 def deterministic_crowding(population, fitness_func, mut_prob=1.0, cross_prob=1.0):
@@ -8,9 +8,14 @@ def deterministic_crowding(population, fitness_func, mut_prob=1.0, cross_prob=1.
     for _ in xrange(len(population.MEMBERS) / 2):
         # select two parents randomly, with no replacement
         first_parent = random.choice(population.MEMBERS)
-        population.MEMBERS.remove(first_parent)
+        idx = np.argwhere(population.MEMBERS == first_parent)
+        np.delete(population.MEMBERS, idx)
+
+        #population.MEMBERS.remove(first_parent)
+
         second_parent = random.choice(population.MEMBERS)
-        population.MEMBERS.remove(second_parent)
+        idx = np.argwhere(population.MEMBERS == second_parent)
+        np.delete(population.MEMBERS, idx)
 
         first_desc, second_desc = first_parent.crossover(second_parent)
 
@@ -22,25 +27,25 @@ def deterministic_crowding(population, fitness_func, mut_prob=1.0, cross_prob=1.
         if first_parent.distance(first_desc) + second_parent.distance(second_desc) <= \
                         first_parent.distance(second_desc) + second_parent.distance(first_desc):
             if first_desc.fitness <= first_parent.fitness:
-                population.MEMBERS.append(first_desc)
+                np.append(population.MEMBERS, first_desc)
             else:
-                population.MEMBERS.append(first_parent)
+                np.append(population.MEMBERS, first_parent)
 
             if second_desc.fitness <= second_parent.fitness:
-                population.MEMBERS.append(second_desc)
+                np.append(population.MEMBERS, second_desc)
             else:
-                population.MEMBERS.append(second_parent)
+                np.append(population.MEMBERS, second_parent)
 
         else:
             if second_desc.fitness <= first_parent.fitness:
-                population.MEMBERS.append(second_desc)
+                np.append(population.MEMBERS, second_desc)
             else:
-                population.MEMBERS.append(first_parent)
+                np.append(population.MEMBERS, first_parent)
 
             if first_desc.fitness <= second_parent.fitness:
-                population.MEMBERS.append(first_desc)
+                np.append(population.MEMBERS, first_desc)
             else:
-                population.MEMBERS.append(second_parent)
+                np.append(population.MEMBERS, second_parent)
 
 
 def RTS(population, fitness_funct, mut_prob, cross_prob, window):
