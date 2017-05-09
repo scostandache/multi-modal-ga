@@ -55,19 +55,19 @@ def RTS(population, fitness_funct, mut_prob, cross_prob, window):
     perform_tournament = False
 
     mut_p = random.random()
-    if mut_p >= mut_prob:
+    if mut_p <= mut_prob:
         first_desc.mutate()
         first_desc.calc_fitness(fitness_funct)
-        perform_tournament = True
+        #perform_tournament = True
 
-    mut_p = random.random()
-    if mut_p >= mut_prob:
+    #mut_p = random.random()
+    #if mut_p <= mut_prob:
         second_desc.mutate()
         second_desc.calc_fitness(fitness_funct)
         perform_tournament = True
 
     cross_p = random.random()
-    if cross_p >= cross_prob:
+    if cross_p <= cross_prob:
         first_desc, second_desc = first_desc.crossover(second_desc)
 
         first_desc.calc_fitness(fitness_funct)
