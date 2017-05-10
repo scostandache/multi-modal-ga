@@ -23,22 +23,21 @@ class GA(object):
         # for i in xrange(gen_no):
         #     niche_method(population, fitness,**kwargs)
         #     if (i % 10 == 0):
-        #         print len(population.MEMBERS)
-        # population.sort()
+        #
+        #         population.sort()
+        #         print population.MEMBERS[0].fitness
 
 
 
         # ===============================
 
-        # x = np.array([member.params_float[0] for member in population.MEMBERS])
-        # y = np.array([member.params_float[1] for member in population.MEMBERS])
-        # z = [ [member.fitness] for member in population.MEMBERS ]
+
 
         x = np.array([])
         y = np.array([])
         z = np.array([])
-
-        def update_graph(self):
+        count = 0
+        def update_graph(count):
 
             x = np.array([member.params_float[0] for member in population.MEMBERS])
             y = np.array([member.params_float[1] for member in population.MEMBERS])
@@ -48,19 +47,19 @@ class GA(object):
             graph.set_3d_properties(z)
 
             ax.set_xlim3d(tuple(LIMITS[0].values()))
-            ax.set_ylim3d(tuple(LIMITS[1].values()))
+            ax.set_ylim3d(tuple(LIMITS[0].values()))
             ax.set_zlim3d(min([member.fitness for member in population.MEMBERS]) - 3,
                           max([member.fitness for member in population.MEMBERS]) + 3)
 
 
             niche_method(population, fitness,**kwargs)
-            title.set_text(str(fitness))
+
+            title.set_text('function = {}, niching = {} time={}'.format(fitness.__name__, niche_method.__name__,count))
             return title, graph,
 
 
-
-
         fig = plt.figure()
+
         ax = fig.add_subplot(111, projection = '3d')
 
         ax.set_xlabel('first argument')
@@ -68,8 +67,8 @@ class GA(object):
         ax.set_zlabel('fitness')
 
         title = ax.set_title('')
-        graph, = ax.plot(xs=x, ys=y, zs=z, linestyle="", marker="o", color='k')
-        ani = matplotlib.animation.FuncAnimation(fig, update_graph, gen_no, interval=1, blit = True)
+        graph, = ax.plot(xs=x, ys=y, zs=z, linestyle="", marker=".", color='k')
+        ani = matplotlib.animation.FuncAnimation(fig, update_graph, gen_no, interval=1, blit = True, repeat=True,  repeat_delay= 5000)
 
         plt.show()
 
