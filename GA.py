@@ -53,8 +53,9 @@ class GA(object):
 
 
             niche_method(population, fitness,**kwargs)
-
-            title.set_text('function = {}, niching = {} time={}'.format(fitness.__name__, niche_method.__name__,count))
+            population.sort()
+            best = population.MEMBERS[0].fitness
+            title.set_text('f = {}, n = {}, t={}, best={}'.format(fitness.__name__[:4], niche_method.__name__[:3],count,best))
             return title, graph,
 
 

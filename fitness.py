@@ -25,7 +25,8 @@ def griewangk(params):
 
 def SHCB(params):
     a, b = params
-    return (4 - 2.1 * (a * a) + (a * a * a * a) / 3.0) * (a * a) + a * b + (-4 + 4 * (b * b)) * (b * b)
+    return (4 - 2.1 * (a * a) + (a * a * a * a) / 3.0) * \
+           (a * a) + a * b + (-4 + 4 * (b * b)) * (b * b)
 
 
 def test(x):
