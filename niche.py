@@ -2,7 +2,7 @@ import random
 import numpy
 import copy
 
-def deterministic_crowding(population, fitness_func, mut_prob=1.0, cross_prob=1.0):
+def deterministic_crowding(population, fitness_func, mut_prob=1.0, cross_prob=1.0,window = 10):
     # Deterministic Crowding niching method
 
     for _ in xrange(len(population.MEMBERS) / 2):
