@@ -1,6 +1,6 @@
 import math
 import numpy as np
-#todo-me rewrite fitness functions in cython
+#todo-me rewrite fitness functions in cython/C
 
 def rastrigin(params):
     fitness = 10 * len(params)

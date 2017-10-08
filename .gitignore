@@ -1,3 +1,5 @@
 .idea
 .idea/*
 *.pyc
+*.sublime-project
+*.sublime-workspace
